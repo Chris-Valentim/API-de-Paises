@@ -1,4 +1,6 @@
 import Card from "./components/Card";
+// import DetailedCountry from "./components/DetailedCountry";
+import './components/styles/global.css';
 import 'tailwindcss/tailwind.css'
 
 function App() {
