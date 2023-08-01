@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react"
-import { client } from "../api/client"
+import { Country, getFlags } from "../api/service/flags"
 
 export const useFlags = () => {
-  const  [infoFlags, setInfoFlags] = useState<any>()
+  const [allFlags, setAllFlags] = useState<Country[]>([]) //cria o estado. iniciando como vazio.
 
-  const requestinfoFlags = async () => {
-    try {
-      const response = await client.get(`/all`);
-       setInfoFlags(response?.data[4].name);
-      console.log(setInfoFlags)
-    } catch (error) {
-      console.log(error)
-    }
+  const handleLoadFlags = async () => { //cria uma função para lidar com o carrregamento das flags. carregar o serviço e manipilar
+    const data = await getFlags() 
+    setAllFlags(data) //Joga para o allFlags.
   }
-  useEffect(() => {
-    requestinfoFlags()
-  }, [])
-  return { infoFlags }
+
+  useEffect(() => {  //Executae em todo o render do componente. 
+    handleLoadFlags()
+  }, []) //exe no primeiro render, pois o arr está vazio.
+
+  return { allFlags }
 }
+
+ 

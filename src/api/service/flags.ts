@@ -1,12 +1,23 @@
 import { client } from "../client"
 
-export const getFlags = async() => {  
+interface CountryName {
+  common: string
+  official: string
+}
+
+export interface Country {
+  name: CountryName
+  capital: string[]
+  population: number
+  region: string
+}
+
+export const getFlags = async () => {  
     try {
-      const response = await client.get(`/all`)
-      const data = response.data
-      console.log(data)
+      const { data } = await client.get<Country[]>(`/all?fields=population,region,capital,name`) 
+      return data 
     } catch (error) {
-      console.log(error)
+      throw error 
     }
   }  
   
