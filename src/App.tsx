@@ -1,7 +1,7 @@
-import Card from "./components/Card";
-import './components/styles/global.css';
-
 import 'tailwindcss/tailwind.css'
+import { BrowserRouter as Router } from 'react-router-dom';
+import DetailedCountry from "./components/DetailedCountry/";
+import './components/styles/global.css';
 import { Header } from "./components/Header/index";
 import { useFlags } from './hooks/useFlags';
 
@@ -16,7 +16,7 @@ function App() {
         <div>
           {item.name.common}
         </div>
-      ))} 
+      ))}
     </div>
   );
 }
