@@ -1,3 +1,6 @@
+import Card from "./components/Card";
+import './components/styles/global.css';
+
 import 'tailwindcss/tailwind.css'
 import { Header } from "./components/Header/index";
 import { useFlags } from './hooks/useFlags';
