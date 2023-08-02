@@ -1,12 +1,18 @@
-import Card from "./components/Card";
-// import DetailedCountry from "./components/DetailedCountry";
-import './components/styles/global.css';
 import 'tailwindcss/tailwind.css'
+import './components/styles/global.css';
+
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import Card from "./components/Card/";
+import DetailedCountry from "./components/DetailedCountry/";
 
 function App() {
   return (
     <div>
-      <Card />
+      <Router>
+        <Card />
+        <DetailedCountry />
+      </Router>
     </div>
   );
 }
