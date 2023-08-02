@@ -1,12 +1,22 @@
 import Card from "./components/Card";
-// import DetailedCountry from "./components/DetailedCountry";
 import './components/styles/global.css';
+
 import 'tailwindcss/tailwind.css'
+import { Header } from "./components/Header/index";
+import { useFlags } from './hooks/useFlags';
 
 function App() {
-  return (
-    <div>
-      <Card />
+
+  const { allFlags }  = useFlags()
+
+  return ( //render info na tela
+    <div className="dark:bghsl(207, 26%, 17%)">
+      <Header />
+      {allFlags.sort().map((item) => (
+        <div>
+          {item.name.common}
+        </div>
+      ))} 
     </div>
   );
 }
