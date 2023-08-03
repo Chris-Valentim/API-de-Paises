@@ -1,22 +1,13 @@
 import 'tailwindcss/tailwind.css'
-import { BrowserRouter as Router } from 'react-router-dom';
-import DetailedCountry from "./components/DetailedCountry/";
+import { RouterProvider } from 'react-router-dom';
 import './components/styles/global.css';
-import { Header } from "./components/Header/index";
-import { useFlags } from './hooks/useFlags';
+import routes from './router';
 
 function App() {
 
-  const { allFlags }  = useFlags()
-
   return ( //render info na tela
     <div className="dark:bghsl(207, 26%, 17%)">
-      <Header />
-      {allFlags.sort().map((item) => (
-        <div>
-          {item.name.common}
-        </div>
-      ))}
+      <RouterProvider router={routes} />
     </div>
   );
 }
