@@ -1,22 +1,31 @@
 import { BsArrowLeft } from 'react-icons/bs';
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom'
+import { Country, getCountry } from '../../api/service/flags';
+import { useState, useEffect } from 'react';
+
 
 const DetailedCountry = () => {
 
+  const [ country, setCountry ] = useState<Country[]>([]) 
+  
+  const  handleLoadCountry = async () => {
+    const data = await getCountry() //solicitou e aguardou o retorno do dado.
+    setCountry(data) //Já recebeu o dado e atribiu ao estado.
+    } //função VOID
+    // console.log(country)
+    
+    useEffect(() => {  //Executae em todo o render do componente. 
+      handleLoadCountry()
+    }, [])
+    console.log(country)
+    
+  const { countryName } = useParams()
   const navigate = useNavigate()
-
   return (
     <div className="flex flex-col justify-center h-screen">
       <button className="mb-10 w-28 py-1 px-5 ml-[66px] flex justify-center items-center gap-2 shadow-[0px_1px_5px_3px_rgba(0,0,0,0.1)] text-zinc-500" onClick={() => {navigate('/')}}>
         <BsArrowLeft />
-        <nav>
-          <ul>
-            <li>
-              <Link to="">Back</Link>
-            </li>
-          </ul>
-        </nav>
+        Back
       </button>
       <div className="flex justify-around items-center h-89">
         <div className="flex flex-col justify-center h-full">

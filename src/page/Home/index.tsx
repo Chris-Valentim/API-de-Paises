@@ -10,7 +10,7 @@ const Home = () => {
     <div className='flex flex-wrap'>
       {allFlags.map((item) => (
         <Card capital={item.capital} flags={item.flags.svg} name={item.name.common} population={item.population} region={item.region} />
-      ))}
+        ))}
     </div>
   )
 }

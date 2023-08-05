@@ -19,7 +19,7 @@ export interface Country {
   flags: FlagsTypes
 }
 
-export const getFlags = async () => {  
+export const getCountries = async () => {  
     try {
       const { data } = await client.get<Country[]>(`/all?fields=population,region,capital,name,flags`) 
       return data 
@@ -28,3 +28,12 @@ export const getFlags = async () => {
     }
   }  
   
+export const getCountry = async () => {
+  try {
+    const { data } = await client.get<Country[]>(`/all?fields=name`)
+    return data
+  } catch (error) {
+    throw error
+  }
+}
+
