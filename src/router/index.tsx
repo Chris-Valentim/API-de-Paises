@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import { DetailedCountry } from '../page/Detailed/index'
+import { CountryDetails } from '../page/Detailed/index'
 import { Pages } from '../page'
 import { Home } from '../page/Home'
 
@@ -15,7 +15,7 @@ const routes = createBrowserRouter([
       },
       {
         path: "/:countryName",
-        element: <DetailedCountry />
+        element: <CountryDetails />
       }
     ]
   },

@@ -1,26 +1,30 @@
+import { useState, useEffect } from 'react';
 import { BsArrowLeft } from 'react-icons/bs';
 import { useParams, useNavigate } from 'react-router-dom'
-import { Country, getCountry } from '../../api/service/flags';
-import { useState, useEffect } from 'react';
 
+import { getCountry, Country } from '../../api/service/flags';
 
-const DetailedCountry = () => {
-
-  const [ country, setCountry ] = useState<Country[]>([]) 
-  
-  const  handleLoadCountry = async () => {
-    const data = await getCountry() //solicitou e aguardou o retorno do dado.
-    setCountry(data) //Já recebeu o dado e atribiu ao estado.
-    } //função VOID
-    // console.log(country)
-    
-    useEffect(() => {  //Executae em todo o render do componente. 
-      handleLoadCountry()
-    }, [])
-    console.log(country)
-    
+const CountryDetails = () => {
+  const [ country, setCountry ] = useState<Country>() 
   const { countryName } = useParams()
   const navigate = useNavigate()
+  
+  const handleLoadCountry = async (countryName: string) => {
+    const data = await getCountry(countryName) //solicitou e aguardou o retorno do dado.
+    setCountry(data) //Já recebeu o dado e atribiu ao estado.
+  } //função VOID
+  // console.log(country)
+  
+  // Executa em todo o render do componente.
+  useEffect(() => { 
+    if (countryName) {  
+      handleLoadCountry(countryName)
+    }
+  }, [countryName])
+
+  console.log(country)
+    
+
   return (
     <div className="flex flex-col justify-center h-screen">
       <button className="mb-10 w-28 py-1 px-5 ml-[66px] flex justify-center items-center gap-2 shadow-[0px_1px_5px_3px_rgba(0,0,0,0.1)] text-zinc-500" onClick={() => {navigate('/')}}>
@@ -29,19 +33,19 @@ const DetailedCountry = () => {
       </button>
       <div className="flex justify-around items-center h-89">
         <div className="flex flex-col justify-center h-full">
-          <img className="w-96" src={"https://flagcdn.com/be.svg"} alt="Imagem do País" />
+          <img className="w-96" src={country?.flags.svg} alt="" />
         </div>
         <div className="flex flex-col justify-center w-1/2 h-full ">
-          <h1 className="text-xl font-bold mb-5">Belgium</h1>
+          <h1 className="text-xl font-bold mb-5">{country?.name.common}</h1>
           <div className="flex flex-col h-32 flex-wrap text-sm">
-            <p>Native Name: <span className="text-zinc-500">Belgie</span></p>
-            <p>Population: <span className="text-zinc-500">11.319.000</span></p>
-            <p>Region: <span className="text-zinc-500">Europe</span></p>
+            <p>Native Name: <span className="text-zinc-500">{country?.name.official}</span></p>
+            <p>Population: <span className="text-zinc-500">{country?.population}</span></p>
+            <p>Region: <span className="text-zinc-500">{country?.region}</span></p>
             <p>Sub Region: <span className="text-zinc-500">Western Europe</span></p>
-            <p>Capital: <span className="text-zinc-500">Brusseis</span></p>
+            <p>Capital: <span className="text-zinc-500">{country?.capital}</span></p>
             <p>Top Level Domain: <span className="text-zinc-500">Be</span></p>
             <p>Currencies: <span className="text-zinc-500">Euro</span></p>
-            <p>Languages: <span className="text-zinc-500">Dutch, French, German</span></p>
+            <p>Languages: <span className="text-zinc-500">{country?.capital}</span></p>
           </div>
           <div className="flex mt-10 text-sm gap-2 items-center">
             <p>Border Countries: </p>
@@ -55,4 +59,4 @@ const DetailedCountry = () => {
   )
 }
 
-export { DetailedCountry}
+export { CountryDetails }

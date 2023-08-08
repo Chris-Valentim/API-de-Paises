@@ -27,7 +27,7 @@ const Card = ({name, capital, population, region, flags}: CardProps) => {
 					<p>Capital: <span className="text-zinc-500">{capital}</span></p>
 				</div>
 			</div>
-			<button className="text-sm border-t bg-gray-100 hover:bg-gray-200 rounded-md" onClick={() => navigate('/detailedcountry')}>
+			<button className="text-sm border-t bg-gray-100 hover:bg-gray-200 rounded-md" onClick={() => navigate(`/${name}`)}>
 					Ver Mais
 			</button>
 		</div>
